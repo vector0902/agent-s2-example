@@ -36,6 +36,10 @@ class Executor:
         buffer = io.BytesIO()
         img.save(buffer, format="PNG")
         buffer.seek(0)
+        
+        # Save to local file
+        img.save("_nosync/a.png")
+        
         return buffer.getvalue()
     
     def exec(self, code):
