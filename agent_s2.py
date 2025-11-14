@@ -32,13 +32,18 @@ class Executor:
             self.platform = {"win32": "windows", "darwin": "darwin"}.get(sys.platform, "linux")
     
     def screenshot(self):
-        img = self.computer.screenshot() if self.remote else self.pyautogui.screenshot()
+        # img = self.computer.screenshot() if self.remote else self.pyautogui.screenshot()
+        # Save to local file
+        # img.save("_nosync/a.png")
+
+        # load a small image to test
+        from PIL import Image
+        # Load image from file instead of taking screenshot
+        img = Image.open("/root/agent-s2-example/_nosync/bd.png")
+
         buffer = io.BytesIO()
         img.save(buffer, format="PNG")
         buffer.seek(0)
-        
-        # Save to local file
-        img.save("_nosync/a.png")
         
         return buffer.getvalue()
     
